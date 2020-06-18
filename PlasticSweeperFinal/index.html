@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" />
+
+
+<head>
+<title>PLASTIC SWEEPER</title>
+
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="content-type" content="text/html" />
+<meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
+
+<meta name="description" content="Data Visualiztion of amount of plastic in the oceans" />
+<meta name="keywords" content="data visualisation, p5.js" />
+<meta name="subject" content="data visualisation" />
+<meta name="language" content="en" />
+<meta name="rating" content="general" />
+<meta name="distribution" content="global" />
+<meta name="author" content="Aditya De" />
+<meta name="owner" content="Aditya De" />
+<meta name="robots" content="all,noodp" />
+
+<link rel="stylesheet" href="resources/stylesheet.css" type="text/css" />
+
+    
+<script src = "resources/jquery-3.4.1.min.js"></script>  
+
+
+<script src="resources/p5.min.js" type="text/javascript"></script>
+<script src="resources/p5.dom.min.js" type="text/javascript"></script>
+<script src="resources/p5.sound.min.js" type="text/javascript"></script>
+
+<script src="sketch.js" type="text/javascript"></script> 
+<script src="cell.js" type="text/javascript"></script> 
+    
+
+</head>
+
+<body>
+    
+    <div id = "title">
+        PLASTIC SWEEPER
+    </div>
+    
+    <div id = "gameover" hidden>
+        GAME OVER!
+    </div>
+    
+    <div id = "cont1"> </div>
+    
+    <div id="startModal" class="modal">
+        <div class="modalContent1">
+                Click on the tiles to reveal what's underneath.
+                <br>
+                Discover all the tiles with clean water to win.
+                <br>
+                Clicking on a tile containing polluted water will end the game.
+                <br>
+                <span style = "background-color: #00e0ff">Blue Tiles</span> indicate clean water while <span style="background-color: red">Red Tiles</span> indicate polluted water.
+                <br>
+                <button class="startb"></button>
+                <br>
+                Click to start!
+        </div>
+    </div>
+    <div id="endModal" class="modal">
+        <div class="modalContent2">
+            <div id="excl">That seemed rigged, right?</div>
+                  <br>
+                  As of 2015 we have dumped 50000000 tons of plastic in the oceans.
+                  <br>
+                  By 2025 this number is projected to reach 150000000 tons.
+                 <br>
+                  At this moment, we are already at <span id="bignumber" class="highlight"></span> 
+                  <br>
+                  Which means we have reached <span id="percent" class="highlight"></span> of the projected number.
+                  <br>
+                  Hence, <span id="dirtynum"></span> boxes are red, while <span id = "cleannum"></span> boxes are blue. 
+                  <br>
+                  Just as the climate crisis grows worse every passing moment,
+                  <br>
+                  This game becomes harder to win as time passes.
+                  <br>
+                  <div id="hashtag">#SayNoToPlastic</div>
+                  <button class="reload"></button>
+                  <br>
+                  Start over?
+        </div>
+</div>
+    <script>
+        var modal1 = $('#startModal')[0];
+        var modal2 = $('#endModal')[0];
+        var start = $('.startb');
+        var restart = $('.reload');
+        
+        var info = setInterval(function(){
+                var dateFuture = new Date(2015, 0, 1);
+                var dateNow = new Date();
+                var seconds = Math.floor(((dateNow) - dateFuture)/1000);
+                var tonsPlastic = Math.floor(((seconds) * 0.31)+50000000);
+                var percentage = Math.floor((tonsPlastic/150000000) * 100)
+                var revper = 100 - percentage;
+                
+                $('#bignumber').html(tonsPlastic + " tons.");
+                $('#percent').html(percentage + "%");
+                $('#dirtynum').html(percentage);
+                $('#cleannum').html(revper);
+            }, 300);
+        
+          var test = setInterval(function(){
+                if (lose == true) {
+                    $('#title').hide();
+                    $('#gameover').show();
+                    setTimeout(function(){
+                        modal2.style.display = "block"; 
+                    }, 2000); 
+                } 
+            }, 500);
+        
+        
+        start.click(function(){
+            console.log("yes");
+            modal1.style.display = "none";
+            start = true;
+        })
+        
+        restart.click(function(){
+            location.reload();
+        })
+    </script>
+    
+    
+    
+    
+    
+</body>
+</html>
+<!-- html -->
